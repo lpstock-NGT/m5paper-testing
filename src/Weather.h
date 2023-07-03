@@ -124,14 +124,14 @@ protected:
       JsonArray hourly_list = root["hourly"];
       hourlyTime[0] = LocalTime(root["current"]["dt"].as<int>());
       hourlyMaxTemp[0] = root["current"]["temp"].as<float>();
-      hourlyMain[0] = root["current"]["weather"][0]["main"].as<char *>();
-      hourlyIcon[0] = root["current"]["weather"][0]["icon"].as<char *>();
+      hourlyMain[0] = root["current"]["weather"][0]["main"].as<const char *>();
+      hourlyIcon[0] = root["current"]["weather"][0]["icon"].as<const char *>();
       for (int i = 1; i < MAX_HOURLY; i++) {
           if (i < hourly_list.size()) {
               hourlyTime[i] = LocalTime(hourly_list[i - 1]["dt"].as<int>());
               hourlyMaxTemp[i] = hourly_list[i - 1]["temp"].as<float>();
-              hourlyMain[i] = hourly_list[i - 1]["weather"][0]["main"].as<char *>();
-              hourlyIcon[i] = hourly_list[i - 1]["weather"][0]["icon"].as<char *>();
+              hourlyMain[i] = hourly_list[i - 1]["weather"][0]["main"].as<const char *>();
+              hourlyIcon[i] = hourly_list[i - 1]["weather"][0]["icon"].as<const char *>();
           }
       }
 
@@ -140,8 +140,8 @@ protected:
           if (i < daily_list.size()) {
               dailyTime[i] = LocalTime(daily_list[i]["dt"].as<int>());
               dailyMaxTemp[i] = daily_list[i]["temp"]["max"].as<float>();
-              dailyMain[i] = daily_list[i]["weather"][0]["main"].as<char *>();
-              dailyIcon[i] = daily_list[i]["weather"][0]["icon"].as<char *>();
+              dailyMain[i] = daily_list[i]["weather"][0]["main"].as<const char *>();
+              dailyIcon[i] = daily_list[i]["weather"][0]["icon"].as<const char *>();
 
               forecastMaxTemp[i] = daily_list[i]["temp"]["max"].as<float>();
               forecastMinTemp[i] = daily_list[i]["temp"]["min"].as<float>();
