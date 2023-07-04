@@ -110,7 +110,7 @@ void WeatherDisplay::DrawBattery(int x, int y)
    }
 }
 
-float getBtcValue()
+/* float getBtcValue()
 {
    HTTPClient http;
    WiFiClient client;
@@ -144,18 +144,14 @@ float getBtcValue()
          return doc.as<JsonObject>()["bpi"]["USD"]["rate_float"];
       }
    }
-}
+} */
 
 /* Draw a the head with AP Name, city, rssi and battery */
 void WeatherDisplay::DrawHead()
 {
-   if (DISPLAY_TOPLEFT == 1) {
-      canvas.drawString("BTC/USD " + String(getBtcValue()), 20, 10);
-   } else {
-      canvas.drawString("AP:" + WiFi.SSID(), 20, 10);
-   }
+   canvas.drawString("wifi:" + WiFi.SSID(), 20, 10);
    canvas.drawCentreString(CITY_NAME, maxX / 2, 10, 1);
-   canvas.drawString(WifiGetRssiAsQuality(myData.wifiRSSI) + "%", maxX - 200, 10);
+   canvas.drawString(WifiGetRssiAsQuality(myData.wifiRSSI) + "%", maxX - 210, 10);
    DrawRSSI(maxX - 155, 25);
    canvas.drawString(String(myData.batteryCapacity) + "%", maxX - 110, 10);
    DrawBattery(maxX - 65, 10);
@@ -331,7 +327,7 @@ void WeatherDisplay::DisplayDisplayWindSection(int x, int y, float angle, float 
    canvas.drawCentreString("W", x - cradius - 15, y - 3, 1);
    canvas.drawCentreString("E", x + cradius + 15, y - 3, 1);
    canvas.drawCentreString(String(windspeed, 1), x, y - 20, 1);
-   canvas.drawCentreString("m/s", x, y, 1);
+   canvas.drawCentreString("mph", x, y, 1);
 
    Arrow(x, y, cradius - 17, angle, 15, 27);
 }
@@ -379,7 +375,7 @@ void WeatherDisplay::DrawDaily(int x, int y, int dx, int dy, Weather &weather, i
    char const *weekdays[] = {"", "SUN", "MON", "TUE", "WED", "THU", "FRI", "SAT"};
    const char *wd = weekdays[weekday(time)];
    canvas.drawCentreString(wd, x + dx / 2, y + 10, 1);
-   canvas.drawCentreString(String(temp) + " C", x + dx / 2, y + 30, 1);
+   canvas.drawCentreString(String(temp) + " F", x + dx / 2, y + 30, 1);
    // canvas.drawCentreString(main,                        x + dx / 2, y + 70, 1);
 
    int iconX = x + dx / 2 - 32;
@@ -437,7 +433,7 @@ void WeatherDisplay::DrawHourly(int x, int y, int dx, int dy, Weather &weather, 
    
    canvas.setTextSize(2);
    canvas.drawCentreString(getHourString(time) + ":00", x + dx / 2, y + 10, 1);
-   canvas.drawCentreString(String(temp) + " C",         x + dx / 2, y + 30, 1);
+   canvas.drawCentreString(String(temp) + " F",         x + dx / 2, y + 30, 1);
    // canvas.drawCentreString(main,                        x + dx / 2, y + 70, 1);
 
    int iconX = x + dx / 2 - 32;
@@ -568,12 +564,12 @@ void WeatherDisplay::Show()
    }
 
    canvas.drawRect(15, 408, maxX - 30, 122, M5EPD_Canvas::G15);
-   DrawGraph(15, 408, 232, 122, "Temperature (C)", 0, 7, -20, 30, myData.weather.forecastMaxTemp);
-   DrawGraph(15, 408, 232, 122, "Temperature (C)", 0, 7, -20, 30, myData.weather.forecastMinTemp);
+   DrawGraph(15, 408, 232, 122, "Temperature (F)", 0, 7, 0, 90, myData.weather.forecastMaxTemp);
+   DrawGraph(15, 408, 232, 122, "Temperature (F)", 0, 7, 0, 90, myData.weather.forecastMinTemp);
    DrawGraph(247, 408, 232, 122, "Rain (mm)", 0, 7, 0, myData.weather.maxRain, myData.weather.forecastRain);
    DrawGraph(479, 408, 232, 122, "Humidity (%)", 0, 7, 0, 100, myData.weather.forecastHumidity);
-   DrawGraph(711, 408, 232, 122, "Wind (m/s)", 0, 7, 0, 10, myData.weather.forecastWind);
-   DrawGraph(711, 408, 232, 122, "Wind (m/s)", 0, 7, 0, 10, myData.weather.forecastWindGust);
+   DrawGraph(711, 408, 232, 122, "Wind (mph)", 0, 7, 0, 30, myData.weather.forecastWind);
+   DrawGraph(711, 408, 232, 122, "Wind (mph)", 0, 7, 0, 30, myData.weather.forecastWindGust);
 
    canvas.pushCanvas(0, 0, UPDATE_MODE_GC16);
    delay(1000);
