@@ -36,7 +36,7 @@
 
 // Refresh the M5Paper info more often.
 // #define REFRESH_PARTLY 1
-#define SHUTDOWN_RESTART_SECONDS 120
+#define SHUTDOWN_RESTART_SECONDS 1800 // 60*30 = 30 minutes
 
 MyData         myData;            // The collection of the global data
 WeatherDisplay myDisplay(myData); // The global display helper class
