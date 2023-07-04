@@ -26,8 +26,9 @@
 bool GetSHT30Values(MyData &myData)
 {
    M5.SHT30.UpdateData();
+   SHT3x::TemperatureScale degree = SHT3x::TemperatureScale::Fahrenheit;
    if(M5.SHT30.GetError() == 0) {
-      myData.sht30Temperatur = (int) M5.SHT30.GetTemperature();
+      myData.sht30Temperatur = (int) M5.SHT30.GetTemperature(degree);
       myData.sht30Humidity   = (int) M5.SHT30.GetRelHumidity();
       return true;
    }

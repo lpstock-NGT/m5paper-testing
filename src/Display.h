@@ -361,7 +361,7 @@ void WeatherDisplay::DrawM5PaperInfo(int x, int y, int dx, int dy)
 
    canvas.setTextSize(3);
    DrawIcon(x + 35, y + 140, (uint16_t *)TEMPERATURE64x64);
-   canvas.drawString(String(myData.sht30Temperatur) + " C", x + 35, y + 210, 1);
+   canvas.drawString(String(myData.sht30Temperatur) + " F", x + 35, y + 210, 1);
    DrawIcon(x + 145, y + 140, (uint16_t *)HUMIDITY64x64);
    canvas.drawString(String(myData.sht30Humidity) + "%", x + 150, y + 210, 1);
 }
