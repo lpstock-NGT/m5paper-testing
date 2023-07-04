@@ -36,6 +36,7 @@
 
 // Refresh the M5Paper info more often.
 // #define REFRESH_PARTLY 1
+#define SHUTDOWN_RESTART_SECONDS 120
 
 MyData         myData;            // The collection of the global data
 WeatherDisplay myDisplay(myData); // The global display helper class
@@ -80,7 +81,7 @@ void setup()
       myDisplay.Show();
       StopWiFi();
    }
-   ShutdownEPD(60 * 60); // every 1 hour
+   ShutdownEPD(SHUTDOWN_RESTART_SECONDS); // time to wake in seconds
 #else 
    myData.LoadNVS();
    if (myData.nvsCounter == 1) {
