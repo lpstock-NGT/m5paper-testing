@@ -205,6 +205,9 @@ void WeatherDisplay::DrawMoon(int x, int y, int dd, int mm, int yy)
    const int number_of_lines = 90;
    double Phase = NormalizedMoonPhase(dd, mm, yy);
 
+   Serial.println("DrawMoon inputs (phase): " + String(Phase));
+   // Serial.printf("DrawMoon inputs (dd, mm, yy):  %02d %02d %04d \n", dd, mm, yy);
+
    canvas.drawCircle(x + diameter - 1, y + diameter, diameter / 2 + 1, M5EPD_Canvas::G15);
 
    for (double Ypos = 0; Ypos <= number_of_lines / 2; Ypos++)
@@ -245,6 +248,7 @@ void WeatherDisplay::DrawMoonInfo(int x, int y, int dx, int dy)
    rtc_date_t date_struct;
 
    M5.RTC.getDate(&date_struct);
+   // Serial.printf("getDate() [Display.h] (dd, mm, yy):  %02d %02d %04d \n", date_struct.day, date_struct.mon, date_struct.year);
 
    canvas.setTextSize(3);
    canvas.drawCentreString("Moon", x + dx / 2, y + 7, 1);

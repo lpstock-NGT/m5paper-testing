@@ -32,6 +32,7 @@ String getRTCDateTimeString()
    
    M5.RTC.getDate(&date_struct);
    M5.RTC.getTime(&time_struct);
+   // Serial.printf("getDate() [Utils.h 35](dd, mm, yy):  %02d %02d %04d \n", date_struct.day, date_struct.mon, date_struct.year);
 
    sprintf(buff,"%02d.%02d.%04d %02d:%02d:%02d",
       date_struct.day,  date_struct.mon, date_struct.year,
@@ -49,6 +50,7 @@ time_t GetRTCTime()
    
   M5.RTC.getDate(&date_struct);
   M5.RTC.getTime(&time_struct);
+  // Serial.printf("getDate() [Utils.h 53](dd, mm, yy):  %02d %02d %04d \n", date_struct.day, date_struct.mon, date_struct.year);
   
   tmSet.Year   = date_struct.year - 1970;
   tmSet.Month  = date_struct.mon;
@@ -67,6 +69,7 @@ String getRTCDateString()
    rtc_date_t date_struct;
    
    M5.RTC.getDate(&date_struct);
+   // Serial.printf("getDate() [Utils.h 72] (dd, mm, yy):  %02d %02d %04d \n", date_struct.day, date_struct.mon, date_struct.year);
 
    sprintf(buff,"%02d/%02d/%04d",
       date_struct.mon,  date_struct.day, date_struct.year);

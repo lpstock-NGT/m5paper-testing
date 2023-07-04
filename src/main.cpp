@@ -56,6 +56,8 @@ bool SetRTCDateTime(MyData &myData)
       RTCDate.day  = day(time);
       M5.RTC.setDate(&RTCDate);
    
+      // Serial.printf("DATE (y/m/d):  %02d %02d %02d \n", RTCDate.year, RTCDate.mon, RTCDate.day);
+
       RTCtime.hour = hour(time);
       RTCtime.min  = minute(time);
       RTCtime.sec  = second(time);
