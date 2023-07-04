@@ -78,7 +78,7 @@ protected:
       uri += "/data/2.5/onecall";
       uri += "?lat=" + String((float) LATITUDE, 5);
       uri += "&lon=" + String((float) LONGITUDE, 5);
-      uri += "&units=metric&lang=en&exclude=minutely";
+      uri += "&units=imperial&lang=en&exclude=minutely";
       uri += "&appid=" + (String) OPENWEATHER_API;
 
       Serial.printf("Requesting %s to %s:%d\n", uri.c_str(), OPENWEATHER_SRV, OPENWEATHER_PORT);
